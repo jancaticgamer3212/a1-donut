@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.sh text eol=lf
+*.png binary
+*.cpio.gz binary
+android1-emulator/phone/a1/rootfs/** -text
+android1-emulator/phone/a1/guest/** -text
+android1-emulator/phone/a1/pokeser -text
+android1-emulator/phone/a1/spawn -text
