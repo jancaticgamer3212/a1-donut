@@ -1,0 +1,5 @@
+a1-app/build/
+a1-app/debug.keystore
+android1-emulator/build/
+android1-emulator/guest/
+*.idsig

@@ -1,0 +1,91 @@
+# Android 1.6 (Donut) guest support for QEMU versatilepb.
+# Merged over arch/arm/configs/versatile_defconfig.
+
+# Android userspace ABI (Donut binaries are ARM EABI, ARMv5)
+CONFIG_AEABI=y
+CONFIG_OABI_COMPAT=n
+CONFIG_ARM_THUMB=y
+
+# Android kernel drivers Donut relies on
+CONFIG_STAGING=y
+CONFIG_ANDROID=y
+CONFIG_ANDROID_BINDER_IPC=y
+CONFIG_ASHMEM=y
+CONFIG_ANDROID_LOW_MEMORY_KILLER=y
+CONFIG_ANDROID_TIMED_OUTPUT=y
+
+# Filesystems / rootfs
+CONFIG_DEVTMPFS=y
+CONFIG_TMPFS=y
+CONFIG_PROC_FS=y
+CONFIG_SYSFS=y
+CONFIG_EXT4_FS=y
+CONFIG_BLK_DEV_INITRD=y
+CONFIG_RD_GZIP=y
+
+# Donut mounts a cpu cgroup and sets shares
+CONFIG_CGROUPS=y
+CONFIG_CGROUP_SCHED=y
+CONFIG_FAIR_GROUP_SCHED=y
+CONFIG_CGROUP_CPUACCT=y
+
+# Input: PL050 keyboard/mouse, USB HID tablet, uinput for injection
+CONFIG_INPUT=y
+CONFIG_INPUT_EVDEV=y
+CONFIG_INPUT_UINPUT=y
+CONFIG_SERIO=y
+CONFIG_SERIO_AMBAKMI=y
+CONFIG_KEYBOARD_ATKBD=y
+# Bridge usb-tablet onto a BTN_TOUCH touchscreen Donut understands
+# (drivers/input/touchscreen/ is only descended into when this is on)
+CONFIG_INPUT_TOUCHSCREEN=y
+CONFIG_A1_TOUCHSCREEN=y
+
+# USB: PCI OHCI controller (QEMU -device pci-ohci) for usb-kbd / usb-tablet
+CONFIG_USB=y
+CONFIG_USB_OHCI_HCD=y
+CONFIG_USB_OHCI_HCD_PCI=y
+CONFIG_USB_ISP1760=y
+CONFIG_USB_ISP1760_HCD=y
+CONFIG_HID=y
+CONFIG_HID_GENERIC=y
+CONFIG_USB_HID=y
+
+# Donut's BatteryService reads /sys/class/power_supply/{battery,ac,usb}
+CONFIG_POWER_SUPPLY=y
+CONFIG_FAKE_BATTERY=y
+
+# Framebuffer: PL110, what Donut's libui opens as /dev/graphics/fb0
+CONFIG_FB=y
+CONFIG_FB_ARMCLCD=y
+CONFIG_FB_CFB_FILLRECT=y
+CONFIG_FB_CFB_COPYAREA=y
+CONFIG_FB_CFB_IMAGEBLIT=y
+CONFIG_FRAMEBUFFER_CONSOLE=n
+CONFIG_LOGO=n
+
+# PCI + virtio for future block/console devices
+CONFIG_PCI=y
+CONFIG_VIRTIO=y
+CONFIG_VIRTIO_PCI=y
+CONFIG_VIRTIO_BLK=y
+CONFIG_VIRTIO_CONSOLE=y
+
+# RTC (Donut's AlarmManager wants /dev/alarm; provided later if needed)
+CONFIG_RTC_CLASS=y
+CONFIG_RTC_DRV_PL031=y
+
+# Networking basics
+CONFIG_NET=y
+CONFIG_UNIX=y
+CONFIG_INET=y
+CONFIG_PACKET=y
+CONFIG_SMC91X=y
+
+# Build speed / debugging
+CONFIG_MODULES=n
+CONFIG_DEBUG_INFO=n
+CONFIG_PRINTK_TIME=y
+CONFIG_MAGIC_SYSRQ=y
+CONFIG_SMP=n
+CONFIG_DEFAULT_MMAP_MIN_ADDR=4096
